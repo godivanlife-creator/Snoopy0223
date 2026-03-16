@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Snoopy | GodiVanLife Pet Tag</title>
+
+<style>
+
+:root{
+--main:#f4a261;
+--bg:#faf7f2;
+}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,
+'PingFang TC','Microsoft JhengHei',sans-serif;
+background:var(--bg);
+margin:0;
+display:flex;
+justify-content:center;
+min-height:100vh;
+}
+
+.app{
+width:100%;
+max-width:420px;
+padding:25px;
+text-align:center;
+}
+
+.avatar{
+width:190px;
+height:190px;
+border-radius:50%;
+border:6px solid white;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+object-fit:cover;
+}
+
+h1{
+margin-top:15px;
+font-weight:600;
+}
+
+.card{
+background:white;
+border-radius:20px;
+padding:22px;
+text-align:left;
+margin:20px 0;
+box-shadow:0 6px 18px rgba(0,0,0,0.06);
+line-height:1.7;
+font-size:15px;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:16px;
+border-radius:40px;
+font-size:17px;
+font-weight:600;
+border:none;
+cursor:pointer;
+margin-top:12px;
+color:white;
+text-decoration:none;
+}
+
+.btn-location{ background:#007aff; }
+.btn-family{ background:#2ed573; }
+.btn-ig{ background:linear-gradient(45deg,#f09433,#dc2743,#bc1888); }
+
+.lang{
+margin-bottom:10px;
+}
+
+.lang button{
+padding:6px 12px;
+border:none;
+border-radius:20px;
+margin:3px;
+cursor:pointer;
+background:white;
+box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+
+.footer{
+margin-top:25px;
+font-size:12px;
+color:#999;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="lang">
+<button onclick="setLang('zh')">中文</button>
+<button onclick="setLang('ja')">日本語</button>
+<button onclick="setLang('en')">English</button>
+</div>
+
+<img src="DOG_PHOTO_URL" class="avatar" alt="Snoopy">
+
+<h1>Snoopy</h1>
+
+<div class="card" id="info"></div>
+
+<button class="btn btn-location" onclick="shareLocation()" id="locBtn"></button>
+
+<a href="tel:0921884847" class="btn btn-family" id="familyBtn1"></a>
+
+<a href="tel:0988811885" class="btn btn-family" id="familyBtn2"></a>
+
+<a href="https://www.instagram.com/snoopy022324/" target="_blank" class="btn btn-ig" id="igBtn"></a>
+
+<div class="footer">
+GodiVanLife Pet Tag
+</div>
+
+</div>
+
+<script>
+
+const text={
+
+zh:{
+info:"🐶 活潑可愛<br><br>⚽ 最喜歡玩球和飛盤",
+loc:"📍 回報目前位置",
+family1:"📞 通知家人1",
+family2:"📞 通知家人2",
+ig:"📸 Instagram 回報"
+},
+
+ja:{
+info:"🐶 元気いっぱいの犬です<br><br>⚽ ボールとフリスビー遊びが大好き",
+loc:"📍 現在地を送る",
+family1:"📞 家族1に知らせる",
+family2:"📞 家族2に知らせる",
+ig:"📸 Instagramで連絡"
+},
+
+en:{
+info:"🐶 Energetic and playful dog<br><br>⚽ Loves playing with balls and frisbees",
+loc:"📍 Share my location",
+family1:"📞 Notify family 1",
+family2:"📞 Notify family 2",
+ig:"📸 Contact via Instagram"
+}
+
+};
+
+function setLang(lang){
+
+document.getElementById("info").innerHTML=text[lang].info;
+
+document.getElementById("locBtn").innerText=text[lang].loc;
+
+document.getElementById("familyBtn1").innerText=text[lang].family1;
+document.getElementById("familyBtn2").innerText=text[lang].family2;
+
+document.getElementById("igBtn").innerText=text[lang].ig;
+
+}
+
+setLang("zh");
+
+function shareLocation(){
+
+if(!navigator.geolocation){
+alert("Location unavailable");
+return;
+}
+
+navigator.geolocation.getCurrentPosition((pos)=>{
+
+const lat=pos.coords.latitude;
+const lng=pos.coords.longitude;
+
+const map=`https://www.google.com/maps?q=${lat},${lng}`;
+
+navigator.clipboard.writeText(map);
+
+alert("Location copied. Please send via Instagram.");
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
